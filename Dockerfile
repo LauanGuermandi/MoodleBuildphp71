@@ -1,7 +1,7 @@
 FROM php:7.1-fpm
 
 # Update and install utils
-RUN apt-get update && apt-get install -my wget gnupg php-bcmath
+RUN apt-get update && apt-get install -my wget gnupg
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 RUN apt-get update && apt-get -y --no-install-recommends install apt-transport-https
 
@@ -29,7 +29,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
 RUN pecl install sqlsrv pdo_sqlsrv swoole
 RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/
-RUN docker-php-ext-install gd socket
+RUN docker-php-ext-install gd sockets bcmath
 RUN docker-php-ext-enable sqlsrv pdo_sqlsrv swoole
 
 # Installing composer
