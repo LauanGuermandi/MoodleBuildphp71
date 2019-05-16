@@ -1,7 +1,7 @@
 FROM php:7.1-fpm
 
 # Update and install utils
-RUN apt-get update && apt-get install -my wget gnupg php71-bcmath
+RUN apt-get update && apt-get install -my wget gnupg php-bcmath
 RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 RUN apt-get update && apt-get -y --no-install-recommends install apt-transport-https
 
