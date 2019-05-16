@@ -17,13 +17,10 @@ RUN apt-get update &&  apt-get -y install unixodbc-dev
 # Installing dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
-    mysql-client \
     libpng-dev \
-    libjpeg62-turbo-dev \
-    libfreetype6-dev \
     locales \
     zip \
-    jpegoptim optipng pngquant gifsicle
+    git
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -46,13 +43,4 @@ RUN usermod -u 1000 www-data
 
 # Create moodledata
 RUN mkdir /var/www/moodledata && chmod 777 -R /var/www/moodledata
-
-# Xdebug config
-RUN yes | pecl install xdebug \
-    && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.remote_autostart=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.remote_host=172.18.0.3" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.remote_port=9009" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.idekey=docker" >> /usr/local/etc/php/conf.d/xdebug.ini
 
